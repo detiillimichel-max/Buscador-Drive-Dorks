@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testador de Operadores de Pesquisa</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-top: 0;
+            margin-bottom: 8px;
+            color: var(--accent);
+            text-align: center;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 24px;
+        }
+
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+        }
+
+        button {
+            background-color: var(--accent);
+            color: #0f172a;
+            border: none;
+            border-radius: 8px;
+            padding: 0 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .example-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+        }
+
+        .example-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .example-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .example-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .example-query {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: var(--accent);
+        }
+
+        .test-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .test-btn:hover {
+            background: var(--accent);
+            color: #0f172a;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>🔍 Testador de Google Dorks</h1>
+        <p class="subtitle">Teste operadores de pesquisa avançada direto no Google</p>
+
+        <!-- Barra de pesquisa livre -->
+        <div class="search-box">
+            <input type="text" id="customQuery" placeholder="Digite sua busca personalizada...">
+            <button onclick="executarBusca()">Pesquisar</button>
+        </div>
+
+        <!-- Exemplos Prontos -->
+        <div class="examples-list">
+            
+            <div class="example-item">
+                <div class="example-info">
+                    <span class="example-desc">Buscar arquivos de vídeo em pastas do Drive</span>
+                    <span class="example-query">site:drive.google.com "mp4"</span>
+                </div>
+                <a href="https://www.google.com/search?q=site:drive.google.com+%22mp4%22" target="_blank" class="test-btn">Testar</a>
+            </div>
+
+            <div class="example-item">
+                <div class="example-info">
+                    <span class="example-desc">Pesquisar termo específico com extensão PDF</span>
+                    <span class="example-query">manutencao filetype:pdf</span>
+                </div>
+                <a href="https://www.google.com/search?q=manutencao+filetype:pdf" target="_blank" class="test-btn">Testar</a>
+            </div>
+
+            <div class="example-item">
+                <div class="example-info">
+                    <span class="example-desc">Encontrar diretórios abertos na web</span>
+                    <span class="example-query">intitle:"index of" manual</span>
+                </div>
+                <a href="https://www.google.com/search?q=intitle:%22index+of%22+manual" target="_blank" class="test-btn">Testar</a>
+            </div>
+
+            <div class="example-item">
+                <div class="example-info">
+                    <span class="example-desc">Filtrar URLs específicas de pastas compartilhadas</span>
+                    <span class="example-query">inurl:drive.google.com/drive/folders</span>
+                </div>
+                <a href="https://www.google.com/search?q=inurl:drive.google.com/drive/folders" target="_blank" class="test-btn">Testar</a>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function executarBusca() {
+            const query = document.getElementById('customQuery').value.trim();
+            if (query) {
+                const url = `https://www.google.com/search?q=${encodeURIComponent(query)}`;
+                window.open(url, '_blank');
+            } else {
+                alert('Por favor, digite um termo para pesquisar.');
+            }
+        }
+    </script>
+</body>
+</html>
